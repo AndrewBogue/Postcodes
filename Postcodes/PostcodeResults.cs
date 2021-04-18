@@ -6,8 +6,8 @@ namespace Postcodes
     {
         public PostcodeResults()
         {
-            results = new List<PostcodeResult>();
+            Results = new List<PostcodeResult>();
         }
-        public List<PostcodeResult> results { get; set; }
+        public List<PostcodeResult> Results { get; set; }
     }
 }

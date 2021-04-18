@@ -9,11 +9,13 @@ namespace Postcodes
     /// </summary>
     public class PostcodeManager
     {
+        // We can decide what to do with this - shut program down/notify user not connected as appropriate
+        private bool isConnected { get; set; }
         List<PostcodeResult> cachedPostcodes;
         public PostcodeManager()
         {
             // Check connection
-            CheckConnection();
+            isConnected = CheckConnection();
             cachedPostcodes = new List<PostcodeResult>();
         }
 
@@ -21,6 +23,7 @@ namespace Postcodes
         {
             try
             {
+                // Try with a postcode we know is valid
                 var result = CallAPI.RunGetAsync(str: "GU1 2EA").GetAwaiter().GetResult();
                 if (result == "NotFound")
                 {
@@ -56,7 +59,6 @@ namespace Postcodes
         /// <returns></returns>
         public List<PostcodeResult> PostCodesToFind(List<string> postcodes)
         {
-            //var val = postcodes.Where(x => cachedPostcodes.Any(y => x == y.Postcode));
             var val = cachedPostcodes.Where(x => postcodes.Any(y => x.PostcodeString == y));
             return val.ToList();
         }

@@ -74,14 +74,14 @@ namespace Postcodes.Controllers
                 //all already exist - return them
                 if (exists.Count == postcodes.Postcodes.Count)
                 {
-                    newPostCodes.results = exists;
+                    newPostCodes.Results = exists;
                     return newPostCodes;
                 }
                 // We need to retrieve at least some postcodes from the API
                 // store the ones we have cached and retrieve the rest
                 foreach (var postCode in exists)
                 {
-                    newPostCodes.results.Add(postCode);
+                    newPostCodes.Results.Add(postCode);
                     postcodes.Postcodes.Remove(postCode.PostcodeString);
                 }
             }
@@ -116,9 +116,9 @@ namespace Postcodes.Controllers
                     postcode.Coordinate = coord;
                 }
                 
-                newPostCodes.results.Add(postcode);
+                newPostCodes.Results.Add(postcode);
             }
-            postcodeManager.AddPostcodes(newPostCodes.results);
+            postcodeManager.AddPostcodes(newPostCodes.Results);
             return newPostCodes;
             
         }
